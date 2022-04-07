@@ -1,0 +1,34 @@
+<div class="container" [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
+
+  <div class="back">
+    <a [routerLink]="['/users']" queryParamsHandling="merge">Go back</a>
+  </div>
+
+  <ng-container *ngIf="userDispatcher.isLoading">
+    <p>Loading..</p>
+  </ng-container>
+
+  <ng-container *ngIf="userDispatcher.isReady">
+
+    <h1>Details for user: </h1>
+    <div class="user" *ngIf="(user$ | async) as user">
+      <div class="user-details">
+        <p>ID:</p>
+        <p>{{ user.id }}</p>
+      </div>
+
+      <div class="user-details">
+        <p>Name:</p>
+        <p>{{ user.name }}</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="userDispatcher.hasError">
+    <p>error</p>
+  </ng-container>
+
+  <button class="reload" [disabled]="userDispatcher.isLoading" [ngClass]="{'isLoading': userDispatcher.isLoading }"
+    (click)="reloadData()">Reload</button>
+
+</div>

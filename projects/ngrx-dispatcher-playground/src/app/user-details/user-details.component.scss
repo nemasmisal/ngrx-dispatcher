@@ -1,0 +1,26 @@
+.container {
+  padding: 20px 50px;
+}
+
+.reload {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  color: green;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.isLoading {
+  cursor: not-allowed;
+}
+
+.user {
+  padding: 10px;
+  &-details {
+    display: flex;
+    p:first-child {
+      margin-right: 10px;
+    }
+  }
+}

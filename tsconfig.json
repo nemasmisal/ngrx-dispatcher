@@ -11,6 +11,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "ngrx-dispatcher": [
+        "dist/ngrx-dispatcher/ngrx-dispatcher",
+        "dist/ngrx-dispatcher"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

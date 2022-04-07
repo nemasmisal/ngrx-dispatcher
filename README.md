@@ -1,27 +1,123 @@
-# Libraries
+# Getting Started with ngrx-dispatcher
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+This is simple directive, that will handle the dispatch of a request, as will re-dispatch if one of the dependencies
+has changed, listen for success either failure and cancel ongoing requests in case of destroying the component before
+request is done. Directive gives you 3 possible states as loading(isLoading), ready(isReady), error(hasError) which can
+be used to show proper template at time.Setup accept Object(which is described few lines down) or Array of Objects.
+Here some basic examples:
 
-## Development server
+## Install && Setup
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+npm install ngrx-dispatcher | yarn add ngrx-dispatcher
+```
 
-## Code scaffolding
+then just import it into your module (could be main or lazy-loaded)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+import { NgrxDispatcherModule } from 'ngrx-dispatcher';
+```
 
-## Build
+## Object info
+{
+    dispatch: function;
+    cancel: function;
+    success$: Observable<any>
+    failed$: Observable<any>
+    dependencies?: Optional Array of Observables;
+}
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Example without dependencies
 
-## Running unit tests
+example.component.ts
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+ ngrxDispatcher: Dispatcher[] = [
+    {
+      dispatch: () => this.store.dispatch(userActions.loadUsers()),
+      cancel: () => this.store.dispatch(userActions.loadUsersCancel()),
+      success$: this.storeActions.pipe(ofType(userActions.loadUsersSuccess)),
+      failed$: this.storeActions.pipe(ofType(userActions.loadUsersFailed)),
+    }
+  ];
+```
 
-## Running end-to-end tests
+exmaple.component.html
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+<div [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
 
-## Further help
+    <ng-container *ngIf="userDispatcher.isLoading">
+        <p>Loading..</p>
+    </ng-container>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    <ng-container *ngIf="userDispatcher.isReady">
+        <h1>Users: </h1>
+        <div *ngFor="let user of (users$ | async)">
+            <p>{{ user.id }}.</p>
+            <p>{{ user.name }}</p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="userDispatcher.hasError">
+        <p>error</p>
+    </ng-container>
+
+</div>
+```
+## Exmaple with dependencies
+
+exmaple.component.ts
+```
+user$ = this.store.select(userSelectors.user);
+userId$ = this.store.select(selectRouteParams).pipe(
+  map(params => params && params['userId']),
+  filter(userId => userId)
+);
+reloadData$ = new BehaviorSubject('');
+
+ngrxDispatcher: Dispatcher[] = [
+  {
+    dispatch: ([id]: [string]) => this.store.dispatch(userActions.loadUser({ id })),
+    cancel: ([id]: [string]) => this.store.dispatch(userActions.loadUserCancel({ id })),
+    success$: this.storeActions.pipe(ofType(userActions.loadUserSuccess)),
+    failed$: this.storeActions.pipe(ofType(userActions.loadUserFailed)),
+    dependencies: [this.userId$, this.reloadData$]
+    }
+  ];
+```
+
+example.component.html
+
+```
+<div [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
+
+  <ng-container *ngIf="userDispatcher.isLoading">
+    <p>Loading..</p>
+  </ng-container>
+
+  <ng-container *ngIf="userDispatcher.isReady">
+
+    <h1>Details for user: </h1>
+    <div *ngIf="(user$ | async) as user">
+      <div>
+        <p>ID:</p>
+        <p>{{ user.id }}</p>
+      </div>
+
+      <div>
+        <p>Name:</p>
+        <p>{{ user.name }}</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="userDispatcher.hasError">
+    <p>error</p>
+  </ng-container>
+
+  <button [disabled]="userDispatcher.isLoading" [ngClass]="{'isLoading': userDispatcher.isLoading }"
+    (click)="reloadData()">Reload</button>
+
+</div>
+```

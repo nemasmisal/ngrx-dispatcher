@@ -1,0 +1,23 @@
+<div class="container" [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
+
+    <ng-container *ngIf="userDispatcher.isLoading">
+        <p>Loading..</p>
+    </ng-container>
+
+    <ng-container *ngIf="userDispatcher.isReady">
+        <h1>Users: </h1>
+        <div [routerLink]="[user.id]" class="user" *ngFor="let user of users$ | async">
+            <p>{{ user.id }}.</p>
+            <p>{{ user.name }}</p>
+        </div>
+
+        <div class="user error" [routerLink]="['-1']">
+            <p>This will lead to error</p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="userDispatcher.hasError">
+        <p>error</p>
+    </ng-container>
+
+</div>
