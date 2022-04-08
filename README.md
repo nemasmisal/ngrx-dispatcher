@@ -1,4 +1,4 @@
-# Getting Started with ngrx-dispatcher
+# Getting Started with ngrx-dispatcher and it playground
 
 This is simple directive, that will handle the dispatch of a request, as will re-dispatch if one of the dependencies
 has changed, listen for success either failure and cancel ongoing requests in case of destroying the component before
@@ -8,14 +8,16 @@ Here some basic examples:
 
 ## Install && Setup
 
-```
-npm install ngrx-dispatcher | yarn add ngrx-dispatcher
+clone the entire project to your local machine.First thing you have to do is build the ngrx-dispatcher module:
+//in terminal @ main folder
+```javascript
+ng build ngrx-dispatcher
 ```
 
-then just import it into your module (could be main or lazy-loaded)
+then you can start the playground simple as:
 
-```
-import { NgrxDispatcherModule } from 'ngrx-dispatcher';
+```javascript
+ng serve
 ```
 
 ## Object info
