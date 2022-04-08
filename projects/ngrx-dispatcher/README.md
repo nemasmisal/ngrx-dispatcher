@@ -8,13 +8,13 @@ Here some basic examples:
 
 ## Install && Setup
 
-```
+```javascript
 npm install ngrx-dispatcher | yarn add ngrx-dispatcher
 ```
 
 then just import it into your module (could be main or lazy-loaded)
 
-```
+```javascript
 import { NgrxDispatcherModule } from 'ngrx-dispatcher';
 ```
 
