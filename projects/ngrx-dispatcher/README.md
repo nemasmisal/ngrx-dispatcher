@@ -19,6 +19,7 @@ import { NgrxDispatcherModule } from 'ngrx-dispatcher';
 ```
 
 ## Object info
+```typescript
 {
     dispatch: function;
     cancel: function;
@@ -26,12 +27,13 @@ import { NgrxDispatcherModule } from 'ngrx-dispatcher';
     failed$: Observable<any>
     dependencies?: Optional Array of Observables;
 }
+```
 
 ## Example without dependencies
 
 example.component.ts
 
-```
+```typescript
  ngrxDispatcher: Dispatcher[] = [
     {
       dispatch: () => this.store.dispatch(userActions.loadUsers()),
@@ -40,11 +42,14 @@ example.component.ts
       failed$: this.storeActions.pipe(ofType(userActions.loadUsersFailed)),
     }
   ];
+
+  constructor(private store: Store, private storeActions: ActionsSubject) { }
+
 ```
 
 exmaple.component.html
 
-```
+```html
 <div [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
 
     <ng-container *ngIf="userDispatcher.isLoading">
@@ -68,7 +73,7 @@ exmaple.component.html
 ## Exmaple with dependencies
 
 exmaple.component.ts
-```
+```typescript
 user$ = this.store.select(userSelectors.user);
 userId$ = this.store.select(selectRouteParams).pipe(
   map(params => params && params['userId']),
@@ -85,11 +90,14 @@ ngrxDispatcher: Dispatcher[] = [
     dependencies: [this.userId$, this.reloadData$]
     }
   ];
+
+  constructor(private store: Store, private storeActions: ActionsSubject) { }
+
 ```
 
 example.component.html
 
-```
+```html
 <div [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
 
   <ng-container *ngIf="userDispatcher.isLoading">
