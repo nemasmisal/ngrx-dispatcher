@@ -44,6 +44,8 @@ example.component.ts
       failed$: this.storeActions.pipe(ofType(userActions.loadUsersFailed)),
     }
   ];
+
+  constructor(private store: Store, private storeActions: ActionsSubject) { }
 ```
 
 exmaple.component.html
@@ -89,6 +91,8 @@ ngrxDispatcher: Dispatcher[] = [
     dependencies: [this.userId$, this.reloadData$]
     }
   ];
+
+  constructor(private store: Store, private storeActions: ActionsSubject) { }
 ```
 
 example.component.html
