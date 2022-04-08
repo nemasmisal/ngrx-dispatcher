@@ -8,8 +8,8 @@ Here some basic examples:
 
 ## Install && Setup
 
-clone the entire project to your local machine.First thing you have to do is build the ngrx-dispatcher module:
-//in terminal @ main folder
+clone the entire project to your local machine.First thing you have to do is build the ngrx-dispatcher module from terminal at the main folder:
+
 ```javascript
 ng build ngrx-dispatcher
 ```
@@ -21,6 +21,7 @@ ng serve
 ```
 
 ## Object info
+```javascript
 {
     dispatch: function;
     cancel: function;
@@ -28,12 +29,13 @@ ng serve
     failed$: Observable<any>
     dependencies?: Optional Array of Observables;
 }
+```
 
 ## Example without dependencies
 
 example.component.ts
 
-```
+```typescript
  ngrxDispatcher: Dispatcher[] = [
     {
       dispatch: () => this.store.dispatch(userActions.loadUsers()),
@@ -46,7 +48,7 @@ example.component.ts
 
 exmaple.component.html
 
-```
+```html
 <div [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
 
     <ng-container *ngIf="userDispatcher.isLoading">
@@ -70,7 +72,7 @@ exmaple.component.html
 ## Exmaple with dependencies
 
 exmaple.component.ts
-```
+```typescript
 user$ = this.store.select(userSelectors.user);
 userId$ = this.store.select(selectRouteParams).pipe(
   map(params => params && params['userId']),
@@ -91,7 +93,7 @@ ngrxDispatcher: Dispatcher[] = [
 
 example.component.html
 
-```
+```typescript
 <div [ngrxDispatcher]="ngrxDispatcher" #userDispatcher="ngrxDispatcher">
 
   <ng-container *ngIf="userDispatcher.isLoading">
