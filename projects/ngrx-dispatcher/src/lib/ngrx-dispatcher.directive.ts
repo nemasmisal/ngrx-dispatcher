@@ -33,7 +33,9 @@ export class NgrxDispatcherDirective {
     return !this.isLoading && !this.hasError;
   }
 
-  @Input() set ngrxDispatcher(dispatcherList: Dispatcher[]) {
+  @Input() set ngrxDispatcher(input: Dispatcher | Dispatcher[]) {
+
+    const dispatcherList = Array.isArray(input) ? input : [input];
 
     for (let i = 0; i < dispatcherList.length; i++) {
       const dispatcher = dispatcherList[i];
@@ -43,7 +45,7 @@ export class NgrxDispatcherDirective {
       this.loadingIndex[i] = false;
       if (dependencies?.length) {
         this.dispatchWithDeps(i, dispatcher);
-        return;
+        continue;
       }
       this.dispatch(i, dispatcher, []).subscribe(this.observer(i));
     }
@@ -97,7 +99,7 @@ export class NgrxDispatcherDirective {
     this.destroySubscriptions$$.next();
     this.destroySubscriptions$$.complete();
     for (let i = 0; i < this.cancelList.length; i++) {
-      if(!this.loadingIndex[i]) { continue; }
+      if (!this.loadingIndex[i]) { continue; }
       const dispatchCancel = this.cancelList[i];
       const deps = this.indexDeps[i];
       dispatchCancel(...(deps || []));
