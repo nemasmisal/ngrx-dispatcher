@@ -31,7 +31,7 @@ import { NgrxDispatcherModule } from 'ngrx-dispatcher';
     AppRoutingModule,
     StoreModule.forRoot({ user: userReducer, router: routerReducer }),
     EffectsModule.forRoot([UserEffects]),
-    StoreDevtoolsModule.instrument(),
+    StoreDevtoolsModule.instrument({connectInZone: true}),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     NgrxDispatcherModule
