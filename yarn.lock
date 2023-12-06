@@ -1754,31 +1754,31 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@ngrx/effects@^14.3.3":
-  version "14.3.3"
-  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-14.3.3.tgz#5c9e43e4dc5e1d544f4604fc6a32feec2380c413"
-  integrity sha512-bP7rIHlu1KAj5Wm0TWR7Q8VlOQOBu8uiN/fDP3Lqi8FwVW6HOq9eBGcFwJGyqwVAmulsvLFB68MhpMYg2W78+w==
+"@ngrx/effects@^15.4.0":
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-15.4.0.tgz#31e80aa2ef13953772607b9c6dcb12efce2e1da5"
+  integrity sha512-/8gHhOM9aeGaw8OG2LLwi4I4p84xzG0EU9TqWrvQcW74wn8sFZONjLvUte5YOzJ5502PPFFrfXSOc+lHnVAJUA==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/router-store@^14.3.3":
-  version "14.3.3"
-  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-14.3.3.tgz#359bb2b7a658fd17ecadcd37d8fcd5e16f05b339"
-  integrity sha512-vmtY4k94fY1jV97A4/5iILkqH9U++40Ok2Jdywg/L816fZJ5UNsHgiyC/iY3vH9gknGtQaMWHvd0w7QL7EhaOw==
+"@ngrx/router-store@^15.4.0":
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-15.4.0.tgz#7ab92ac545bdde7e70dd992d4bb96a22fe6f9d2e"
+  integrity sha512-uc8gx+SMr2gyly+WSBmGnpHTPsMVhenUG6skH3Qk67hrwdVG3SABjw3qdP4GibbfwwajMQ67sLaLY8PQZ5Sb2g==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store-devtools@^14.3.3":
-  version "14.3.3"
-  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-14.3.3.tgz#ffffb154a63d468331e20c90e486c9b0de008d5d"
-  integrity sha512-YQFFKYRnmREHCUb0aAaAgSXWKjZqV+5pmzsjW6HZ0GTKoy9R3JI7Miw0gplwkJpLO7Z3AFCuLQIpTs5ryAOwPQ==
+"@ngrx/store-devtools@^15.4.0":
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-15.4.0.tgz#39c1a31f813dc4328ed0fb826843845c83422c2d"
+  integrity sha512-AqWRprSyS3u/vZlpsBOPMW1/0TZS2LE13/KpZedEY+RMCW+mi53esqgrdNGOB3Wr4vrI82Ar9fgaIm4TQO6LPg==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store@^14.3.3":
-  version "14.3.3"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-14.3.3.tgz#397d7fe54fb6c580282240c149f76f6f48ebf2a3"
-  integrity sha512-VhPDR2a5OQJfrVRah3vdJgL/F6UC8NU/X7lxKFqBW3NC+pmlIeFO/y8jLrZOKBXwG45tY9wrg15S70nEGoZtHA==
+"@ngrx/store@^15.4.0":
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-15.4.0.tgz#185ee18e5c4147c7db60fd3b223cc429f826d514"
+  integrity sha512-OvCuNBHL8mAUnRTS6QSFm+IunspsYNu2cCwDovBNn7EGhxRuGihBeNoX47jCqWPHBFtokj4BlatDfpJ/yCh4xQ==
   dependencies:
     tslib "^2.0.0"
 

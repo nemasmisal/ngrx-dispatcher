@@ -1,4 +1,4 @@
-import { getSelectors } from "@ngrx/router-store";
+import { getRouterSelectors } from "@ngrx/router-store";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { IUserState } from "./reducer";
 
