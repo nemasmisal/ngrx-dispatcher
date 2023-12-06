@@ -103,10 +103,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngrx-dispatcher-playground:build:production"
+              "buildTarget": "ngrx-dispatcher-playground:build:production"
             },
             "development": {
-              "browserTarget": "ngrx-dispatcher-playground:build:development"
+              "buildTarget": "ngrx-dispatcher-playground:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -114,7 +114,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngrx-dispatcher-playground:build"
+            "buildTarget": "ngrx-dispatcher-playground:build"
           }
         },
         "test": {
