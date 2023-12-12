@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { selectRouteParams, userSelectors } from '../+store/selectors';
 import * as userActions from '../+store/actions';
-import { map, filter, BehaviorSubject } from 'rxjs';
+import { map, filter, BehaviorSubject, Observable } from 'rxjs';
 import { Dispatcher } from 'ngrx-dispatcher';
 import { ofType } from '@ngrx/effects';
+import { User } from '../user.service';
 
 @Component({
   selector: 'app-user-details',
@@ -13,17 +14,17 @@ import { ofType } from '@ngrx/effects';
 })
 export class UserDetailsComponent {
 
-  user$ = this.store.select(userSelectors.user);
-  userId$ = this.store.select(selectRouteParams).pipe(
+  public readonly user$: Observable<User | null> = this.store.select(userSelectors.user);
+  public readonly userId$: Observable<string> = this.store.select(selectRouteParams).pipe(
     map(params => params && params['userId']),
-    filter(userId => userId)
+    filter(userId => !!userId)
   );
-  reloadData$ = new BehaviorSubject('');
+  public readonly reloadData$ = new BehaviorSubject(0);
 
   ngrxDispatcher: Dispatcher[] = [
     {
-      dispatch: ([id]: [string]) => this.store.dispatch(userActions.loadUser({ id })),
-      cancel: ([id]: [string]) => this.store.dispatch(userActions.loadUserCancel({ id })),
+      dispatch: (id: string) => this.store.dispatch(userActions.loadUser({ id })),
+      cancel: (id: string) => this.store.dispatch(userActions.loadUserCancel({ id })),
       success$: this.storeActions.pipe(ofType(userActions.loadUserSuccess)),
       failed$: this.storeActions.pipe(ofType(userActions.loadUserFailed)),
       dependencies: [this.userId$, this.reloadData$]
@@ -35,7 +36,7 @@ export class UserDetailsComponent {
     private storeActions: ActionsSubject
   ) { }
 
-  reloadData(): void {
-    this.reloadData$.next('');
+  public reloadData(): void {
+    this.reloadData$.next(0);
   }
 }

@@ -4,6 +4,8 @@ import { userSelectors } from '../+store/selectors';
 import * as userActions from '../+store/actions';
 import { Dispatcher } from 'ngrx-dispatcher';
 import { ofType } from '@ngrx/effects';
+import { Observable } from 'rxjs';
+import { User } from '../user.service';
 
 @Component({
   selector: 'app-user',
@@ -12,9 +14,9 @@ import { ofType } from '@ngrx/effects';
 })
 export class UserComponent {
 
-  users$ = this.store.select(userSelectors.users);
+  public readonly users$: Observable<User[] | null> = this.store.select(userSelectors.users);
 
-  ngrxDispatcher: Dispatcher[] = [
+  public readonly ngrxDispatcher: Dispatcher[] = [
     {
       dispatch: () => this.store.dispatch(userActions.loadUsers()),
       cancel: () => this.store.dispatch(userActions.loadUsersCancel()),

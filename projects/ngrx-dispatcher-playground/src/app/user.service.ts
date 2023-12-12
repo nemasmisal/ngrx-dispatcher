@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+
+export interface User {
+    "id": number,
+    "name": String,
+}
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +14,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  loadUsers(): Observable<any> {
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
+  loadUsers(): Observable<User[]> {
+    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
   }
 
-  loadUserById([id]: [string]): Observable<any> {
-    return this.http.get('https://jsonplaceholder.typicode.com/users/' + id);
+  loadUserById(id: string): Observable<User> {
+    return this.http.get<User>('https://jsonplaceholder.typicode.com/users/' + id);
   }
 }

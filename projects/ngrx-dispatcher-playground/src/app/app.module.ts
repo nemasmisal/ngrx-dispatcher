@@ -15,8 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
-
-import { NgrxDispatcherModule } from 'ngrx-dispatcher';
+import { NgrxDispatcherDirective } from 'ngrx-dispatcher';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,7 @@ import { NgrxDispatcherModule } from 'ngrx-dispatcher';
     StoreDevtoolsModule.instrument({connectInZone: true}),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
-    NgrxDispatcherModule
+    NgrxDispatcherDirective
   ],
   bootstrap: [AppComponent]
 })

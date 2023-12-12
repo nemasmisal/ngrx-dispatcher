@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { createAction, props } from "@ngrx/store";
+import { User } from "../user.service";
 
 export const UsersActionTypes = {
     loadUsers: '[User] Load Users',
@@ -19,7 +20,7 @@ export const loadUsers = createAction(UsersActionTypes.loadUsers);
 export const loadUsersCancel = createAction(UsersActionTypes.loadUsersCancel);
 export const loadUsersSuccess = createAction(
     UsersActionTypes.loadUsersSuccess,
-    props<{ users: any[] }>()
+    props<{ users: User[] }>()
 );
 export const loadUsersFailed = createAction(
     UsersActionTypes.loadUsersFailed,
@@ -36,7 +37,7 @@ export const loadUserCancel = createAction(
 );
 export const loadUserSuccess = createAction(
     UserActionTypes.loadUserSuccess,
-    props<{ id: string, user: any }>()
+    props<{ id: string, user: User }>()
 );
 export const loadUserFailed = createAction(
     UserActionTypes.loadUserFailed,

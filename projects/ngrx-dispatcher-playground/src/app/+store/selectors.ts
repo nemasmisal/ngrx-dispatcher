@@ -12,4 +12,4 @@ export const userSelectors = {
     user: getUser
 }
 
-export const { selectRouteParams } = getSelectors();
+export const { selectRouteParams } = getRouterSelectors();

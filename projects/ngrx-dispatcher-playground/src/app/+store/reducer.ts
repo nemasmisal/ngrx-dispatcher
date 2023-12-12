@@ -1,18 +1,19 @@
-import { Action, createReducer, on } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import * as user from "./actions";
+import { User } from "../user.service";
 
 export interface IUserState {
-    users: any[] | null;
-    user: any | null;
+  users: User[] | null;
+  user: User | null;
 }
 
 export const initialState: IUserState = {
-    users: null,
-    user: null
+  users: null,
+  user: null
 }
 
 export const userReducer = createReducer(
-    initialState,
-    on(user.loadUsersSuccess, (state, { users }) => ({ ...state, users })),
-    on(user.loadUserSuccess, (state, { user, id }) => ({ ...state, user }))
+  initialState,
+  on(user.loadUsersSuccess, (state, { users }) => ({ ...state, users })),
+  on(user.loadUserSuccess, (state, { user }) => ({ ...state, user }))
 );
